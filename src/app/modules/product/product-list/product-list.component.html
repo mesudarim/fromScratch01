@@ -1,0 +1,27 @@
+<div class="table-responsive">
+  <p>La valeur du NgModel est {{listFilter}}</p>
+  <input [(ngModel)]='listFilter' type="text" value ="a">
+  <table *ngIf='products && products.length' class="table table-striped">
+    <thead>
+      <th><button (click)="toggleImage()">{{showImage ? "Hide" : "Show"}} image</button></th>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Star rating</th>
+    </thead>
+    <tbody>
+      <tr *ngFor='let product of (products | productFilter:listFilter)'>
+        <td><img [src]='product.imageUrl' width="20px" *ngIf="showImage"/></td>
+        <td>{{product.productName}}</td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.releaseDate}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.starRating}}</td>
+        <td>{{product.productName | reverse}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
