@@ -6,6 +6,8 @@ import { HeaderComponent } from './modules/layout/header/header.component';
 import { ProductListComponent } from './modules/product/product-list/product-list.component';
 import { ReversePipe } from './shared/pipes/reverse.pipe';
 import { ProductFilterPipe } from './modules/layout/product/product-list/product-filter.pipe';
+import { StarRatingComponent } from './shared/component/star-rating/star-rating.component';
+import { ProductService } from './shared/models/product.service';
 
 @NgModule({
   declarations: [
@@ -13,13 +15,14 @@ import { ProductFilterPipe } from './modules/layout/product/product-list/product
     HeaderComponent,
     ProductListComponent,
     ReversePipe,
-    ProductFilterPipe
+    ProductFilterPipe,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

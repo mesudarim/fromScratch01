@@ -3,7 +3,7 @@
   <input [(ngModel)]='listFilter' type="text" value ="a">
   <table *ngIf='products && products.length' class="table table-striped">
     <thead>
-      <th><button (click)="toggleImage()">{{showImage ? "Hide" : "Show"}} image</button></th>
+      <th><button (click)="toggleImage()" class="btn btn-primary">{{showImage ? "Hide" : "Show"}} image</button></th>
       <th>Name</th>
       <th>Code</th>
       <th>Date</th>
@@ -19,8 +19,12 @@
         <td>{{product.releaseDate}}</td>
         <td>{{product.description}}</td>
         <td>{{product.price}}</td>
-        <td>{{product.starRating}}</td>
-        <td>{{product.productName | reverse}}</td>
+        <td>
+          {{product.starRating}}
+          <app-star-rating [rating]="product.starRating" (ratingClicked)="product.starRating = $event">
+          </app-star-rating>
+        </td>
+        <!--<td>{{product.productName | reverse}}</td>-->
       </tr>
     </tbody>
   </table>
