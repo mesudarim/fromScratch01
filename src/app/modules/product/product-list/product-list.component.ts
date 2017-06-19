@@ -9,13 +9,12 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  pageTitle: string = 'Product List'
   showImage: boolean = true;
   listFilter: string = "";
   //products: IProduct[];
   products: Observable<IProduct[]>;
-
-
-
+  
   constructor(private productService: ProductService) { }
 
   toggleImage(): void{

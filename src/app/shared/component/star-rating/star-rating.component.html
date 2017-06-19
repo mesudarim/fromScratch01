@@ -2,4 +2,5 @@
   *ngFor='let rate of [1,2,3,4,5]'
    [class.orange]="rate <= rating"
    class="glyphicon glyphicon-star"
+   (click)="rateIt(rate)"
    ></span>
