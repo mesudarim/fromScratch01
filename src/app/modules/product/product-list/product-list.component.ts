@@ -1,5 +1,6 @@
 import { IProduct, ProductService } from './../../../shared/models/product.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProductListComponent implements OnInit {
   showImage: boolean = true;
   listFilter: string = "";
-  products: IProduct[];
+  //products: IProduct[];
+  products: Observable<IProduct[]>;
 
 
 
@@ -22,7 +24,13 @@ export class ProductListComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.products = this.productService.getProducts()
+    // this.productService.getProducts()
+    //      .subscribe(
+    //        products => this.products = products,
+    //        error => console.error(error)
+    //      )
+
+    this.products = this.productService.getProducts();
   }
 
 }

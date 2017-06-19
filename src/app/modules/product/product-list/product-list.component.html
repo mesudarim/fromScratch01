@@ -1,7 +1,9 @@
 <div class="table-responsive">
   <p>La valeur du NgModel est {{listFilter}}</p>
   <input [(ngModel)]='listFilter' type="text" value ="a">
-  <table *ngIf='products && products.length' class="table table-striped">
+  <table *ngIf='true || products && products.length' class="table table-striped">
+    <!-- J'ai mis le true plus haut just pour garder ce petit bout de code du ngIf car j'aurais du l'enlever. On utilise
+  maintenant le async et du coup il n'y a plus de raison de garder celui là. Mais je voulais juste en garder une trace-->
     <thead>
       <th><button (click)="toggleImage()" class="btn btn-primary">{{showImage ? "Hide" : "Show"}} image</button></th>
       <th>Name</th>
@@ -12,7 +14,7 @@
       <th>Star rating</th>
     </thead>
     <tbody>
-      <tr *ngFor='let product of (products | productFilter:listFilter)'>
+      <tr *ngFor='let product of (products | async | productFilter:listFilter)'>
         <td><img [src]='product.imageUrl' width="20px" *ngIf="showImage"/></td>
         <td>{{product.productName}}</td>
         <td>{{product.productCode}}</td>
