@@ -1,26 +1,51 @@
+<div class="panel-heading">
+    {{pageTitle}}
+</div>
+
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-2">Filter by:</div>
+        <div class="col-md-10">
+            <input [(ngModel)]="listFilter" name="listFilter" type="text" placeholder="type to filter" />
+        </div>
+    </div>
+    <div class="row" *ngIf="listFilter">
+        <div class="col-md-12">
+            <h3>Filtered by: {{ listFilter }} (reversed: {{ listFilter | reverse }} 👌)</h3>
+        </div>
+    </div>
+
+    <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+
 <div class="table-responsive">
-  <p>La valeur du NgModel est {{listFilter}}</p>
-  <input [(ngModel)]='listFilter' type="text" value ="a">
+  <!--<p>La valeur du NgModel est {{listFilter}}</p>
+  <input [(ngModel)]='listFilter' type="text" value ="a">-->
   <table *ngIf='true || products && products.length' class="table table-striped">
     <!-- J'ai mis le true plus haut just pour garder ce petit bout de code du ngIf car j'aurais du l'enlever. On utilise
   maintenant le async et du coup il n'y a plus de raison de garder celui là. Mais je voulais juste en garder une trace-->
     <thead>
-      <th><button (click)="toggleImage()" class="btn btn-primary">{{showImage ? "Hide" : "Show"}} image</button></th>
+      <th>
+        <button (click)="toggleImage()" class="btn btn-primary">
+        {{showImage ? "Hide" : "Show"}} image
+        </button>
+      </th>
       <th>Name</th>
       <th>Code</th>
       <th>Date</th>
-      <th>Description</th>
       <th>Price</th>
       <th>Star rating</th>
     </thead>
     <tbody>
       <tr *ngFor='let product of (products | async | productFilter:listFilter)'>
         <td><img [src]='product.imageUrl' width="20px" *ngIf="showImage"/></td>
-        <td>{{product.productName}}</td>
-        <td>{{product.productCode}}</td>
-        <td>{{product.releaseDate}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.price}}</td>
+        <td>
+            <a [routerLink]="[product.id]">
+              {{product.productName}}
+            </a>
+        </td>
+        <td>{{product.productCode | uppercase}}</td>
+        <td>{{product.releaseDate | date }}</td>
+        <td>{{product.price | currency }}</td>
         <td>
           {{product.starRating}}
           <app-star-rating [rating]="product.starRating" (ratingClicked)="product.starRating = $event">
